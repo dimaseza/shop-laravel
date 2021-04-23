@@ -6,16 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class Transaction extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name', 'description', 'price', 'slug'
+        'users_id', 'name', 'email', 'address', 'phoone', 'courier',
+        'payment', 'payment_url', 'total_price', 'status'
     ];
 
-    public function galleries()
+    public function user()
     {
-        return $this->hasMany(ProductGallery::class, 'products_id', 'id');
+        return $this->belongsTo(User::class, 'users_id', 'id');
     }
 }
